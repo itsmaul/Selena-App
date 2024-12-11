@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TensorFlow.js Model Training and Anomaly Detection</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+</head>
+
+<body>
+  <h1>TensorFlow.js Model Training and Anomaly Detection</h1>
+
+  <script>
+    // Fungsi untuk memuat model
+    async function loadModel() {
+      const modelUrl = './my-autoencoder.json';  // Ganti dengan path ke model .json kamu
+      try {
+        const model = await tf.loadLayersModel(modelUrl);
+        console.log('Model berhasil dimuat:', model);
+        return model;
+      } catch (error) {
+        console.error('Terjadi kesalahan saat memuat model:', error);
+        return null;
+      }
+    }
+
+    // Fungsi untuk melatih model
+    async function trainModel(model, trainData, epochs = 10) {
+      model.compile({
+        optimizer: tf.train.adam(),
+        loss: 'meanSquaredError',
+      });
+
+      const batchSize = 32;
+
+      // Latih model
+      for (let epoch = 0; epoch < epochs; epoch++) {
+        const history = await model.fit(trainData, trainData, {
+          epochs: 1,
+          batchSize: batchSize,
+          validationSplit: 0.1,
+          shuffle: true,
+        });
+
+        console.log(`Epoch ${epoch + 1}: loss = ${history.history.loss[0]}`);
+      }
+
+      console.log('Pelatihan selesai!');
+      return model;
+    }
+
+    // Fungsi untuk preprocessing data dan mengembalikan nilai min dan max
+    function preprocessData(rawData) {
+      const processedData = rawData.map(entry => {
+        const date = new Date(entry.date);
+        const dayOfWeek = date.getDay();
+        const month = date.getMonth();
+        const dayOfMonth = date.getDate();
+        const year = date.getFullYear();
+        const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
+
+        return [entry.amount, dayOfWeek, month, dayOfMonth, year, dayOfYear];
+      });
+
+      const dataTensor = tf.tensor2d(processedData);
+      const minValues = dataTensor.min(0);
+      const maxValues = dataTensor.max(0);
+      const normalizedData = dataTensor.sub(minValues).div(maxValues.sub(minValues));
+
+      // Mengembalikan data normalisasi dan nilai min/max
+      return { normalizedData, minValues, maxValues, processedData };
+    }
+
+    // Fungsi untuk memuat data dari file JSON
+    async function loadDataFromJson() {
+      const response = await fetch('./pengeluaran.json');
+      const data = await response.json();
+      return data;
+    }
+
+    // Fungsi untuk mendeteksi anomali berdasarkan rekonstruksi error
+    // Fungsi untuk mendeteksi anomali berdasarkan rekonstruksi error
+    // Fungsi untuk mendeteksi anomali berdasarkan rekonstruksi error
+    async function detectAnomalies(model, data, minValues, maxValues, rawData, percentileThreshold = 97) {
+      // Prediksi rekonstruksi data
+      const reconstructed = model.predict(data);
+      const reconstructionError = data.sub(reconstructed).square().mean(1); // MSE per data point
+
+      // Menentukan threshold untuk anomali
+      const sortedErrors = await reconstructionError.array();
+      const thresholdIndex = Math.floor(sortedErrors.length * (percentileThreshold / 100));
+      const threshold = sortedErrors.sort((a, b) => a - b)[thresholdIndex];
+
+      // Mengidentifikasi data dengan error lebih besar dari threshold
+      const anomalies = rawData.map((entry, index) => {
+        const error = reconstructionError.arraySync()[index];
+        if (error > threshold) {
+          return {
+            date: entry.date,
+            amount: entry.amount,
+            transactionId: entry.transactionId
+          };
+        }
+        return null;
+      }).filter(anomaly => anomaly !== null);
+
+      // Mengembalikan anomali dalam format JSON
+      return JSON.stringify(anomalies, null, 2); // Menyusun JSON yang lebih terstruktur
+    }
+
+
+
+    // Fungsi utama untuk memuat, melatih, dan mendeteksi anomali
+    async function main() {
+      const model = await loadModel();
+
+      // Memuat data dari file JSON
+      const rawData = await loadDataFromJson();
+
+      // Proses data
+      const { normalizedData, minValues, maxValues, processedData } = preprocessData(rawData);
+
+      // Latih model
+      await trainModel(model, normalizedData, 100);  // Melatih model selama 50 epoch
+
+      // Setelah pelatihan, simpan model
+      await model.save('localstorage://my-autoencoder');
+
+      // Deteksi anomali dengan persentil yang ditentukan (misalnya, 99)
+      const anomaliesJson = await detectAnomalies(model, normalizedData, minValues, maxValues, rawData, 99);
+
+      // Menampilkan hasil deteksi anomali dalam bentuk JSON
+      console.log('Data anomali (dalam format JSON):');
+      console.log(anomaliesJson);  // Menampilkan daftar anomali dalam format JSON
+    }
+
+    // Panggil fungsi utama
+    main();
+  </script>
+</body>
+
+</html>
