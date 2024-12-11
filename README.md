@@ -8,7 +8,7 @@ Selena App is an integrated application designed to manage financial transaction
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [System Architecture](#system-architecture)
+- [Cloud Architecture](#system-architecture)
 - [Installation and Setup](#installation-and-setup)
 - [API Documentation](#api-documentation)
 - [Contributors](#contributors)
@@ -53,11 +53,30 @@ Selena App is an integrated application designed to manage financial transaction
 
 ## System Architecture
 
-![System Architecture Diagram](https://storage.googleapis.com/selena_model_bucket/selena-cloud-architecture)
+### Current Architecture
+The current architecture is optimized to minimize resource costs while maintaining essential functionalities. Key components include:
 
-- **Frontend (MD):** Mobile application for user interaction.
-- **Backend (CC):** API to handle requests and process data.
-- **ML Component:** Provides insights and recommendations based on data.
+- **Frontend (MD):** Mobile application interacting with the backend APIs for user input and financial data management.
+- **Backend (CC):** Deployed on **Google Cloud Run**, handling API requests and performing database operations.
+- **Database:** **Cloud SQL** for structured storage of transaction and user data.
+- **Temporary Storage:** **Cloud Firestore** for managing OTP verification in real time.
+- **Model Storage:** **Google Cloud Storage** for uploading and storing TensorFlow.js models.
+
+![Current Cloud Architecture](https://storage.googleapis.com/selena_model_bucket/Cloud%20Architecture%20-%20A.png)
+
+---
+
+### Recommended Architecture
+For a real-case scenario, the architecture can be expanded to include enhanced scalability and performance features:
+
+- **Frontend (MD):** Mobile app remains the primary user interface.
+- **Backend (CC):** Continues on **Google Cloud Run** but with additional integration for GPU-powered **Compute Engine** to process ML tasks like anomaly detection.
+- **ML Processing:** High-performance **Compute Engine** instances for running ML models and delivering real-time insights.
+- **Database:** **Cloud SQL** for relational data and **Google Cloud Storage** for large-scale data and model handling.
+- **Temporary Data Storage:** **Cloud Firestore** for real-time data like OTPs.
+- **Artifact Management:** **Artifact Registry** to manage and deploy containerized services.
+
+![Current Cloud Architecture](https://storage.googleapis.com/selena_model_bucket/Cloud%20Architecture%20-%20B.png)
 
 ---
 
