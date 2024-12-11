@@ -51,7 +51,7 @@ Selena App is an integrated application designed to manage financial transaction
 
 ---
 
-## System Architecture
+## Cloud Architecture
 
 ### Current Architecture
 The current architecture is optimized to minimize resource costs while maintaining essential functionalities. Key components include:
