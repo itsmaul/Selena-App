@@ -53,7 +53,7 @@ Selena App is an integrated application designed to manage financial transaction
 
 ## System Architecture
 
-![System Architecture Diagram](https://drive.google.com/file/d/1PuT3fif0Q03hhCEHkIhLPoK0koACZlzA/view?usp=sharing)
+![System Architecture Diagram](https://storage.googleapis.com/selena_model_bucket/selena-cloud-architecture)
 
 - **Frontend (MD):** Mobile application for user interaction.
 - **Backend (CC):** API to handle requests and process data.
