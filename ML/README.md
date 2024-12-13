@@ -7,7 +7,9 @@
 - Notebook_Integrated.ipynb: A notebook documenting the experiments, iterations, and development of models for the Selena Application.
 
 About the dataset, we use from Kaggle:
-'https://www.kaggle.com/datasets/bukolafatunde/personal-finance?select=personal_transactions.csv'
+<br>
+`https://www.kaggle.com/datasets/bukolafatunde/personal-finance`
+<br>
 and primary data that is obtained from any users.
 
 This directory supports the machine learning aspects of the project, ensuring seamless integration with the application's other components.
