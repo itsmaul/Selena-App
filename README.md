@@ -105,6 +105,14 @@ The dataset was collected manually by gathering transaction histories ("mutasi r
 
 ---
 
+## Previous Github Repositories
+
+MD Github: https://github.com/dorizx/SelenaApp
+CC Github: https://github.com/anthrofax/selena-backend-service
+ML Github: https://github.com/calistasalscpw/Selena-Finance-Tracker
+
+---
+
 # Link Application
 https://drive.google.com/drive/folders/1NqCNwd5DWX0OOvuj5eVqy9vNA4pDDpaO?usp=drive_link
 
