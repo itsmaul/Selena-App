@@ -97,7 +97,7 @@ Key Endpoints:
 
 ## Dataset Machine Learning
 
-The dataset used for the Machine Learning component is stored on [GitHub](https://github.com/calistasalscpw/Selena-Finance-Tracker).
+The dataset used for the Machine Learning component is stored on [GitHub](https://github.com/calistasalscpw/Selena-Finance-Tracker/tree/risma).
 
 **Reasoning:**
 The dataset was collected manually by gathering transaction histories ("mutasi rekening") from several individuals. This approach was necessary because publicly available datasets are predominantly from foreign sources, which do not accurately reflect the spending patterns and behaviors of users in Indonesia. By using locally sourced data, the model can provide more relevant and effective financial insights tailored to the Indonesian context.
