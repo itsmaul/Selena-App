@@ -93,7 +93,6 @@ Key Endpoints:
 - **PUT /transactions/:id**: Update a transaction.
 - **DELETE /transactions/:transactionId**: Delete a transaction.
 - **DELETE /transactions/delete-all/:userId**: Delete all user's transactions.
-
 ---
 
 ## Dataset Machine Learning
