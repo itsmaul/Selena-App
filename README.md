@@ -113,7 +113,7 @@ The dataset was collected manually by gathering transaction histories ("mutasi r
 ---
 
 # Link Application
-https://drive.google.com/drive/folders/1NqCNwd5DWX0OOvuj5eVqy9vNA4pDDpaO?usp=drive_link
+https://drive.google.com/file/d/1b4SkTC5QXyPJ33eVc6mf4FPS9RN3Lsrd/view?usp=drive_link
 
 ---
 
