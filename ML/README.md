@@ -5,6 +5,7 @@
 - model: Includes autoencoder models for testing and simulation before integration into the application.
 - tfjs: Contains the finalized model in JSON format along with JavaScript logic for integrating the model into the application.
 - Notebook_Integrated.ipynb: A notebook documenting the experiments, iterations, and development of models for the Selena Application.
+- Cleaning_NewData.ipynb: A notebook documenting the data processing of new data for testing.
 - requirements.txt: Contains all libraries imported for the project.
 
 About the dataset, we use from Kaggle:
