@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.transaction.TransactionFragment">
+
+    <RelativeLayout
+        android:id="@+id/dataContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="15dp"
+        android:background="@drawable/bg_opacity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/label_total_income"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/total_income"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv_income"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:layout_below="@+id/label_total_income"
+            tools:text="@string/_100000"/>
+
+        <TextView
+            android:id="@+id/label_total_outcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/tv_income"
+            android:text="@string/total_outcome"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_outcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:layout_below="@+id/label_total_outcome"
+            tools:text="@string/_100000"/>
+
+        <TextView
+            android:id="@+id/label_total_profit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_outcome"
+            android:layout_marginTop="20dp"
+            android:text="@string/total_profit"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_profit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:layout_below="@+id/label_total_profit"
+            tools:text="@string/_100000"/>
+
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/refreshButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintTop_toBottomOf="@id/dataContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="end"
+        android:background="@drawable/bg_refresh"/>
+
+    <TextView
+        android:id="@+id/text_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/transaction_history"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dataContainer"/>
+
+    <TextView
+        android:id="@+id/text_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/warning_no_transaction"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dashboard"/>
+
+    <!-- RecyclerView untuk List Transaksi -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTransaksi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_status"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_add_transaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="80dp"
+        android:text="@string/add_transaction"
+        app:cornerRadius="32dp"
+        app:icon="@drawable/ic_add"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
